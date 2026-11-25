@@ -4,81 +4,125 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tu Contrato Perfecto | Revisa tu contrato antes de firmar</title>
-<meta name="description" content="Responde 8 preguntas sencillas y descubre qué puntos de tu contrato conviene revisar antes de firmar.">
+<meta name="description" content="Responde 8 preguntas o sube tu contrato y recibe comentarios de IA sobre los puntos que conviene revisar antes de firmar.">
 <style>
 :root{
   --bg:#f1f0e8; --card:#fbfbf6; --brown:#7a5f3b; --brown-d:#5b4529;
-  --ink:#1a1a1a; --muted:#555; --white:#fff;
-  --ok:#2e9e3f; --mid:#d9a406; --bad:#b3121d; --soft:#e6e4d6;
+  --ink:#1a1a1a; --muted:#555; --soft:#e6e4d6;
+  --ok:#2e9e3f; --mid:#d9a406; --bad:#b3121d;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#1b1a17; --card:#262420; --ink:#f2f0e8; --muted:#b9b5a8; --soft:#322f29; --brown:#a88656; --brown-d:#c9a672;
-  }
+  :root{--bg:#1b1a17;--card:#262420;--ink:#f2f0e8;--muted:#b9b5a8;--soft:#322f29;--brown:#a88656;--brown-d:#c9a672}
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
 section{padding:4.5rem 5vw}
-.wrap{max-width:1000px;margin:0 auto}
+.wrap{max-width:960px;margin:0 auto}
 h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;letter-spacing:-1px}
-h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;margin-bottom:.6rem}
-.lead{color:var(--muted);font-size:1.1rem;max-width:640px}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.15;margin-bottom:.6rem}
+h3{margin-bottom:.3rem}
+.lead{color:var(--muted);font-size:1.08rem;max-width:660px}
+.alt-bg{background:var(--soft)}
+/* header */
 header{position:sticky;top:0;z-index:10;background:var(--brown);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.8rem 5vw;gap:1rem;flex-wrap:wrap}
 header a{color:#fff;text-decoration:none;font-size:.95rem}
 header nav{display:flex;gap:1.2rem;flex-wrap:wrap}
 header nav a:hover{text-decoration:underline}
 .brand{font-weight:700}
-.btn{display:inline-block;background:var(--brown);color:#fff;border:0;border-radius:999px;padding:.9rem 1.8rem;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
+/* botones */
+.btn{display:inline-block;background:var(--brown);color:#fff;border:0;border-radius:999px;padding:.85rem 1.7rem;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s;font-family:inherit}
 .btn:hover{background:var(--brown-d);transform:translateY(-2px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .btn.alt{background:transparent;color:var(--brown);border:2px solid var(--brown)}
 .btn.alt:hover{background:var(--brown);color:#fff}
+/* hero */
 .hero{min-height:78vh;display:flex;align-items:center}
 .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center}
 .hero h1 span{color:var(--brown)}
 .hero p{margin:1.2rem 0 1.8rem}
 .hero-card{background:var(--brown);color:#fff;border-radius:28px;padding:2rem;box-shadow:0 20px 40px #0003}
-.hero-card h3{margin-bottom:1rem}
 .hero-card li{list-style:none;padding:.5rem 0;border-bottom:1px solid #ffffff30}
 .hero-card li:last-child{border:0}
+/* tarjetas */
 .grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:1.8rem}
-.card{background:var(--card);border-radius:20px;padding:1.5rem;box-shadow:0 6px 18px #0001}
-.card h3{margin-bottom:.4rem}
+.card{background:var(--card);border-radius:20px;padding:1.5rem;box-shadow:0 6px 18px #0001;margin-bottom:1.2rem}
+.grid .card{margin-bottom:0}
 .card p{color:var(--muted);font-size:.97rem}
 .num{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--brown);color:#fff;font-weight:700;margin-bottom:.8rem}
-.alt-bg{background:var(--soft)}
-.chips{margin-top:1.4rem}
 .chip{display:inline-block;background:var(--brown);color:#fff;padding:.5rem 1.1rem;border-radius:999px;margin:.25rem .25rem .25rem 0;font-weight:600;font-size:.93rem}
-/* Herramienta */
-.bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden;margin:1rem 0 1.6rem}
-.bar i{display:block;height:100%;width:0;background:var(--brown);transition:width .3s}
+.chips{margin-top:1.4rem}
+/* pestañas */
+.tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.6rem 0 1.2rem}
+.tab{flex:1;min-width:220px;padding:.9rem 1.2rem;border-radius:16px;border:2px solid var(--brown);background:transparent;color:var(--brown);font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit;transition:.2s}
+.tab.on{background:var(--brown);color:#fff}
+.panel{display:none}.panel.on{display:block}
 label.lbl{font-weight:600}
-select{display:block;padding:.7rem 1rem;border-radius:12px;border:2px solid var(--brown);background:var(--card);color:var(--ink);font-size:1rem;margin:.4rem 0 1.4rem}
+select,input[type=text],input[type=password]{width:100%;padding:.75rem 1rem;border-radius:12px;border:2px solid var(--soft);background:var(--card);color:var(--ink);font-size:1rem;font-family:inherit}
+select{border-color:var(--brown);margin:.4rem 0 1.2rem}
+.alt-bg select,.alt-bg input[type=text]{background:var(--card)}
+.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}
+/* cuestionario */
+.bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden;margin:.4rem 0 1.4rem}
+.alt-bg .bar{background:var(--bg)}
+.bar i{display:block;height:100%;width:0;background:var(--brown);transition:width .3s}
 .q{background:var(--card);border-radius:18px;padding:1.1rem 1.3rem;margin-bottom:.9rem;border-left:6px solid var(--brown)}
 .q.err{border-left-color:var(--bad)}
-.q p{font-weight:600;margin-bottom:.2rem}
+.q p{font-weight:600;margin-bottom:.2rem;color:var(--ink);font-size:1rem}
 .q small{display:block;color:var(--muted);margin-bottom:.6rem}
 .opts label{display:inline-flex;align-items:center;gap:.4rem;margin-right:1.5rem;cursor:pointer}
 .opts input{accent-color:var(--brown);width:1.1rem;height:1.1rem}
-.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}
-#result{display:none;margin-top:2rem}
-.res{border-radius:24px;padding:1.8rem;background:var(--card);box-shadow:0 8px 24px #0002;border-top:10px solid var(--brown)}
+/* resultados */
+.out{display:none;margin-top:1.8rem}
+.res{border-top:10px solid var(--brown)}
 .res.bajo{border-top-color:var(--ok)}.res.medio{border-top-color:var(--mid)}.res.alto{border-top-color:var(--bad)}
-.dot{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:.5rem}
+.dot{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:.5rem;background:var(--brown)}
 .bajo .dot{background:var(--ok)}.medio .dot{background:var(--mid)}.alto .dot{background:var(--bad)}
-.res h3{font-size:1.7rem;margin-bottom:.3rem}
-.res h4{margin:1.3rem 0 .5rem}
+.res h3{font-size:1.7rem}
+.res h4{margin:1.3rem 0 .5rem;font-size:1.1rem}
+.res p{color:var(--ink)}
+.tipo{color:var(--muted)!important;margin-bottom:.6rem}
 .rec{background:var(--soft);border-radius:14px;padding:.9rem 1.1rem;margin:.6rem 0}
 .rec b{display:block;margin-bottom:.2rem}
 .rec span{display:block;margin-top:.3rem;font-size:.85rem;color:var(--muted)}
-.note{font-size:.88rem;color:var(--muted);margin-top:1.2rem}
-/* Niveles */
+.note{font-size:.88rem;color:var(--muted)!important;margin-top:1.2rem}
+.cta{margin-top:1.2rem;padding:1rem 1.2rem;border-radius:14px;background:var(--soft)}
+ul.chk{list-style:none}
+ul.chk li{padding:.45rem 0;border-bottom:1px solid var(--soft)}
+ul.chk li:last-child{border:0}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;padding:.15rem .6rem;border-radius:99px;color:#fff;margin-right:.5rem}
+.b-si{background:var(--ok)}.b-no{background:var(--bad)}.b-dudoso{background:var(--mid)}
+.clausula{background:var(--soft);border-radius:14px;padding:1rem 1.2rem;margin:.7rem 0}
+.clausula q{display:block;font-style:italic;color:var(--muted);margin:.3rem 0;font-size:.93rem}
+.sev-alta{border-left:6px solid var(--bad)}.sev-media{border-left:6px solid var(--mid)}.sev-baja{border-left:6px solid var(--ok)}
+ol.preg{padding-left:1.3rem}ol.preg li{margin:.4rem 0}
+/* subida */
+#drop{border:3px dashed var(--brown);border-radius:22px;padding:2.2rem 1rem;text-align:center;cursor:pointer;background:var(--card);transition:.2s}
+#drop.over{background:var(--soft)}
+#drop .ico{font-size:2.6rem}
+#drop small{display:block;color:var(--muted);margin-top:.4rem}
+#fileinfo{margin-top:.8rem;font-weight:600}
+.consent{display:flex;gap:.6rem;align-items:flex-start;margin-top:1rem;font-size:.92rem;color:var(--muted)}
+.consent input{margin-top:.3rem;accent-color:var(--brown);width:1.1rem;height:1.1rem}
+details.cfg{margin-top:1rem;font-size:.92rem}
+details.cfg summary{cursor:pointer;color:var(--muted)}
+details.cfg div{margin-top:.6rem}
+#status{margin-top:1rem;font-weight:600}
+.spin{display:inline-block;width:18px;height:18px;border:3px solid var(--soft);border-top-color:var(--brown);border-radius:50%;animation:s 1s linear infinite;vertical-align:middle;margin-right:.5rem}
+@keyframes s{to{transform:rotate(360deg)}}
+.err-t{color:var(--bad);font-weight:600}
+/* chat */
+#chat{max-height:380px;overflow-y:auto;margin:.8rem 0}
+.msg{padding:.7rem 1rem;border-radius:16px;margin:.5rem 0;max-width:88%;white-space:pre-wrap}
+.msg.u{background:var(--brown);color:#fff;margin-left:auto}
+.msg.a{background:var(--soft)}
+.row{display:flex;gap:.6rem}
+/* niveles / faq */
 .lv{border-top:8px solid}.lv.a{border-color:var(--ok)}.lv.b{border-color:var(--mid)}.lv.c{border-color:var(--bad)}
-/* FAQ */
-details{background:var(--card);border-radius:16px;padding:1rem 1.3rem;margin-top:.8rem;box-shadow:0 4px 12px #0001}
-summary{cursor:pointer;font-weight:600}
-details p{margin-top:.6rem;color:var(--muted)}
-.aviso{background:var(--soft);border-left:6px solid var(--brown);border-radius:14px;padding:1.2rem 1.4rem;margin-top:1.5rem}
+details.faq{background:var(--card);border-radius:16px;padding:1rem 1.3rem;margin-top:.8rem;box-shadow:0 4px 12px #0001}
+details.faq summary{cursor:pointer;font-weight:600}
+details.faq p{margin-top:.6rem;color:var(--muted)}
+.aviso{background:var(--card);border-left:6px solid var(--brown);border-radius:14px;padding:1.2rem 1.4rem;margin-top:1.5rem;font-size:.93rem}
 footer{background:var(--brown-d);color:#fff;text-align:center;padding:2.2rem 5vw}
 footer q{font-size:1.25rem;display:block;margin-bottom:.4rem}
 footer small{opacity:.85}
@@ -92,7 +136,7 @@ footer small{opacity:.85}
   <nav>
     <a href="#como">Cómo funciona</a>
     <a href="#revisamos">Qué revisamos</a>
-    <a href="#revisar">Revisar mi contrato</a>
+    <a href="#herramienta">Revisar mi contrato</a>
     <a href="#faq">Preguntas frecuentes</a>
   </nav>
 </header>
@@ -101,8 +145,8 @@ footer small{opacity:.85}
   <div class="wrap">
     <div>
       <h1>Antes de firmar, <span>revisa lo importante.</span></h1>
-      <p class="lead">Responde 8 preguntas sencillas sobre tu contrato y descubre en pocos minutos qué puntos conviene aclarar antes de aceptar. No necesitas saber de leyes.</p>
-      <a class="btn" href="#revisar">Revisar mi contrato</a>
+      <p class="lead">Responde 8 preguntas sencillas o sube tu contrato y recibe comentarios de una inteligencia artificial en lenguaje claro. No necesitas saber de leyes.</p>
+      <a class="btn" href="#herramienta">Revisar mi contrato</a>
     </div>
     <div class="hero-card">
       <h3>Pensado para tu caso</h3>
@@ -119,11 +163,11 @@ footer small{opacity:.85}
 <section id="como" class="alt-bg">
   <div class="wrap">
     <h2>Así de simple</h2>
-    <p class="lead">Tres pasos y sin registrarte.</p>
+    <p class="lead">Elige la forma que prefieras. Sin registrarte.</p>
     <div class="grid">
       <div class="card"><div class="num">1</div><h3>Elige tu tipo de contrato</h3><p>Alquiler, servicios u otro acuerdo.</p></div>
-      <div class="card"><div class="num">2</div><h3>Responde con Sí o No</h3><p>Mira tu contrato y contesta 8 preguntas cortas.</p></div>
-      <div class="card"><div class="num">3</div><h3>Recibe tu orientación</h3><p>Verás un semáforo de riesgo y qué puntos pedir que te aclaren.</p></div>
+      <div class="card"><div class="num">2</div><h3>Responde o sube tu archivo</h3><p>Contesta 8 preguntas de Sí o No, o sube tu contrato en PDF, Word o foto.</p></div>
+      <div class="card"><div class="num">3</div><h3>Recibe tu orientación</h3><p>Verás un semáforo de riesgo, los puntos a aclarar y qué preguntar a la otra parte.</p></div>
     </div>
   </div>
 </section>
@@ -131,7 +175,7 @@ footer small{opacity:.85}
 <section id="revisamos">
   <div class="wrap">
     <h2>¿Qué conviene revisar antes de firmar?</h2>
-    <p class="lead">Muchos conflictos nacen de cosas que no quedaron claras desde el inicio. Estos son los puntos que vamos a repasar contigo:</p>
+    <p class="lead">Muchos conflictos nacen de cosas que no quedaron claras desde el inicio. Esto es lo que repasamos contigo:</p>
     <div class="chips">
       <span class="chip">Quiénes firman</span><span class="chip">Para qué es el contrato</span>
       <span class="chip">Qué hace cada parte</span><span class="chip">Cuánto dura</span>
@@ -141,11 +185,15 @@ footer small{opacity:.85}
   </div>
 </section>
 
-<section id="revisar" class="alt-bg">
+<section id="herramienta" class="alt-bg">
   <div class="wrap">
     <h2>Revisa tu contrato</h2>
-    <p class="lead">Ten tu contrato a la mano. Tus respuestas se quedan en tu dispositivo: no se guardan ni se envían a ningún lado.</p>
-    <div class="bar" aria-hidden="true"><i id="progreso"></i></div>
+    <p class="lead">Elige cómo quieres hacerlo.</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab on" id="tabQ" role="tab" aria-selected="true">📝 Cuestionario rápido</button>
+      <button class="tab" id="tabI" role="tab" aria-selected="false">🤖 Subir mi contrato (IA)</button>
+    </div>
 
     <label class="lbl" for="tipo">¿Qué tipo de contrato vas a firmar?</label>
     <select id="tipo">
@@ -155,14 +203,64 @@ footer small{opacity:.85}
       <option value="otro">Otro contrato simple</option>
     </select>
 
-    <form id="form" novalidate></form>
-
-    <div class="actions">
-      <button class="btn" id="analizar" type="button">Ver mi resultado</button>
-      <button class="btn alt" id="ejemplo" type="button">Ver un ejemplo</button>
-      <button class="btn alt" id="reiniciar" type="button">Empezar de nuevo</button>
+    <!-- PESTAÑA 1: CUESTIONARIO -->
+    <div class="panel on" id="panelQ">
+      <p class="lead" style="margin-bottom:.8rem">Ten tu contrato a la mano. Tus respuestas se quedan en tu dispositivo: no se guardan ni se envían a ningún lado.</p>
+      <div class="bar" aria-hidden="true"><i id="progreso"></i></div>
+      <form id="form" novalidate></form>
+      <div class="actions">
+        <button class="btn" id="analizar" type="button">Ver mi resultado</button>
+        <button class="btn alt" id="ejemplo" type="button">Ver un ejemplo</button>
+        <button class="btn alt" id="reiniciarQ" type="button">Empezar de nuevo</button>
+      </div>
+      <div class="out" id="resultQ" aria-live="polite"></div>
     </div>
-    <div id="result" aria-live="polite"></div>
+
+    <!-- PESTAÑA 2: IA -->
+    <div class="panel" id="panelI">
+      <div class="card">
+        <div id="drop" tabindex="0" role="button" aria-label="Subir archivo">
+          <div class="ico">📄</div>
+          <b>Arrastra tu contrato aquí o haz clic para elegirlo</b>
+          <small>PDF, Word (.docx), TXT o foto (JPG/PNG) · máximo 10 MB</small>
+          <input type="file" id="file" accept=".pdf,.docx,.txt,image/png,image/jpeg" hidden>
+        </div>
+        <div id="fileinfo"></div>
+
+        <label class="consent">
+          <input type="checkbox" id="ok">
+          <span>Entiendo que el contenido de mi documento se enviará a Anthropic (Claude) para ser analizado. Evita subir datos muy sensibles: puedes tapar tu DNI, cuentas bancarias y direcciones antes de subirlo.</span>
+        </label>
+
+        <details class="cfg" id="cfg">
+          <summary>⚙️ Configuración de conexión</summary>
+          <div id="cfgKey">
+            <label for="key">Clave de API de Anthropic (solo modo demo; se guarda únicamente en la memoria de esta pestaña)</label>
+            <input type="password" id="key" placeholder="sk-ant-..." autocomplete="off">
+          </div>
+        </details>
+
+        <div class="actions">
+          <button class="btn" id="go" disabled>Analizar mi contrato</button>
+          <button class="btn alt" id="resetI" type="button">Empezar de nuevo</button>
+        </div>
+        <div id="status" aria-live="polite"></div>
+      </div>
+
+      <div class="out" id="outI">
+        <div class="card res" id="resCard"></div>
+        <div class="card">
+          <h3>💬 Pregunta lo que quieras sobre tu contrato</h3>
+          <div id="chat"></div>
+          <div class="row">
+            <input type="text" id="q" placeholder="Ej.: ¿Qué pasa si quiero terminar antes el contrato?">
+            <button class="btn" id="send">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aviso"><b>Importante:</b> esta herramienta ofrece orientación inicial. Los comentarios de la IA pueden contener errores y no constituyen asesoría legal ni garantía de que un contrato sea válido o seguro. En contratos de alto valor o ante dudas serias, consulta con un abogado.</div>
   </div>
 </section>
 
@@ -172,7 +270,7 @@ footer small{opacity:.85}
     <div class="grid">
       <div class="card lv a"><h3>🟢 Bajo riesgo</h3><p>Tu contrato tiene los elementos básicos. Aun así, léelo completo antes de firmar.</p></div>
       <div class="card lv b"><h3>🟡 Riesgo medio</h3><p>Hay algunos puntos que conviene aclarar antes de firmar.</p></div>
-      <div class="card lv c"><h3>🔴 Requiere mayor revisión</h3><p>Faltan varios elementos importantes. Te recomendamos revisarlo con detalle antes de decidir.</p></div>
+      <div class="card lv c"><h3>🔴 Requiere mayor revisión</h3><p>Faltan varios elementos importantes. Revisa el contrato con detalle antes de decidir.</p></div>
     </div>
   </div>
 </section>
@@ -180,12 +278,12 @@ footer small{opacity:.85}
 <section id="faq" class="alt-bg">
   <div class="wrap">
     <h2>Preguntas frecuentes</h2>
-    <details><summary>¿Necesito saber de leyes para usarlo?</summary><p>No. Las preguntas están escritas en lenguaje cotidiano y solo requieren que mires tu contrato.</p></details>
-    <details><summary>¿Mis datos están seguros?</summary><p>Sí. Todo se procesa en tu navegador. No pedimos tu nombre ni el texto del contrato, y no guardamos tus respuestas.</p></details>
-    <details><summary>¿Me dice si mi contrato es válido?</summary><p>No. Te orienta sobre qué puntos revisar, pero no determina por sí solo la validez de un contrato.</p></details>
-    <details><summary>¿Reemplaza a un abogado?</summary><p>No. Es una primera orientación. Si el contrato es de alto valor o tienes dudas serias, consulta con un abogado.</p></details>
-    <details><summary>¿Qué hago si me sale riesgo medio o alto?</summary><p>Pide por escrito a la otra parte que aclare o agregue los puntos señalados, y no firmes hasta tenerlos resueltos.</p></details>
-    <div class="aviso"><b>Importante:</b> un resultado de “bajo riesgo” no garantiza que el contrato sea seguro. Esta herramienta ofrece orientación inicial y no constituye asesoría legal.</div>
+    <details class="faq"><summary>¿Necesito saber de leyes para usarlo?</summary><p>No. Todo está escrito en lenguaje cotidiano y solo requiere que mires tu contrato.</p></details>
+    <details class="faq"><summary>¿Qué diferencia hay entre el cuestionario y subir mi archivo?</summary><p>El cuestionario es rápido y funciona en tu navegador, sin enviar nada. Al subir tu contrato, una IA lee el texto real, señala cláusulas concretas y responde tus preguntas.</p></details>
+    <details class="faq"><summary>¿Mis datos están seguros?</summary><p>En el cuestionario, nada sale de tu dispositivo. Si subes un archivo, su contenido se envía a Anthropic para analizarlo, y solo lo haces si das tu consentimiento. Te recomendamos tapar datos sensibles antes de subirlo.</p></details>
+    <details class="faq"><summary>¿Me dice si mi contrato es válido?</summary><p>No. Te orienta sobre qué puntos revisar, pero no determina por sí sola la validez de un contrato.</p></details>
+    <details class="faq"><summary>¿Reemplaza a un abogado?</summary><p>No. Es una primera orientación. Si el contrato es de alto valor o tienes dudas serias, consulta con un abogado.</p></details>
+    <details class="faq"><summary>¿Qué hago si me sale riesgo medio o alto?</summary><p>Pide por escrito a la otra parte que aclare o agregue los puntos señalados, y no firmes hasta tenerlos resueltos.</p></details>
   </div>
 </section>
 
@@ -194,7 +292,32 @@ footer small{opacity:.85}
   <small>Tu Contrato Perfecto · Orientación inicial sobre contratos</small>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script>
+// ================== CONFIGURACIÓN ==================
+// Modo producción: pega aquí la URL de tu Cloudflare Worker.
+// Si lo dejas vacío, se usa el modo demo con la clave del usuario.
+const PROXY_URL = "";
+const MODEL = "claude-sonnet-5-5";
+const MAX_MB = 10;
+// ====================================================
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// ---------- Pestañas ----------
+function tab(which){
+  const q = which === "Q";
+  $("tabQ").classList.toggle("on", q); $("tabI").classList.toggle("on", !q);
+  $("tabQ").setAttribute("aria-selected", q); $("tabI").setAttribute("aria-selected", !q);
+  $("panelQ").classList.toggle("on", q); $("panelI").classList.toggle("on", !q);
+}
+$("tabQ").onclick = () => tab("Q");
+$("tabI").onclick = () => tab("I");
+
+// =====================================================
+//  PARTE 1: CUESTIONARIO RÁPIDO
+// =====================================================
 const PREGUNTAS = [
   {t:"¿El contrato tiene los nombres completos de las personas o empresas que van a firmar?", ayuda:"Revisa que aparezcan nombres completos, documento de identidad (DNI o RUC) y domicilio.", ok:"si", obl:true,
    rec:"Pide que se identifique a todas las partes con nombre completo, documento y domicilio. Si firma una empresa, que figure su representante.",
@@ -219,7 +342,7 @@ const PREGUNTAS = [
    ley:"Código Civil, arts. 1341 y 1430: cláusula penal y resolución del contrato por incumplimiento."},
   {t:"¿Hay alguna parte del contrato que no entiendes o que te parece confusa?", ayuda:"Si dudas de una cláusula, responde Sí.", ok:"no", obl:false,
    rec:"Pide que reformulen las cláusulas confusas por escrito. Las dudas se aclaran antes de firmar, no después.",
-   ley:"Código Civil, art. 168: el contrato se interpreta según lo que está expresado; Ley 29571, art. 49: protección frente a cláusulas abusivas en contratos de consumo."}
+   ley:"Código Civil, art. 168: el contrato se interpreta según lo expresado; Ley 29571, art. 49: protección frente a cláusulas abusivas en contratos de consumo."}
 ];
 
 const TIPOS = {
@@ -229,7 +352,7 @@ const TIPOS = {
   otro:"Verifica que el contrato refleje exactamente lo conversado y que no existan acuerdos verbales sin escribir."
 };
 
-const form = document.getElementById("form");
+const form = $("form");
 form.innerHTML = PREGUNTAS.map((p,i)=>`
   <div class="q" id="q${i}">
     <p>${i+1}. ${p.t}</p>
@@ -242,71 +365,242 @@ form.innerHTML = PREGUNTAS.map((p,i)=>`
 
 function actualizarBarra(){
   const n = PREGUNTAS.filter((p,i)=>form.querySelector(`input[name="q${i}"]:checked`)).length;
-  document.getElementById("progreso").style.width = (n/PREGUNTAS.length*100)+"%";
+  $("progreso").style.width = (n/PREGUNTAS.length*100)+"%";
 }
 form.addEventListener("change", actualizarBarra);
 
-function analizar(){
+function analizarQ(){
   const resp = []; let faltan = false;
   PREGUNTAS.forEach((p,i)=>{
     const sel = form.querySelector(`input[name="q${i}"]:checked`);
-    const box = document.getElementById("q"+i);
-    box.classList.toggle("err", !sel);
+    $("q"+i).classList.toggle("err", !sel);
     if(!sel) faltan = true;
     resp.push(sel ? sel.value : null);
   });
-  const res = document.getElementById("result");
-  res.style.display = "block";
+  const res = $("resultQ"); res.style.display = "block";
   if(faltan){
-    res.innerHTML = `<div class="res"><h3>Faltan respuestas</h3><p>Responde las 8 preguntas para ver tu resultado. Las que faltan están marcadas en rojo.</p></div>`;
+    res.innerHTML = `<div class="card res"><h3>Faltan respuestas</h3><p>Responde las 8 preguntas para ver tu resultado. Las que faltan están marcadas en rojo.</p></div>`;
     return;
   }
   const fallos = PREGUNTAS.map((p,i)=>i).filter(i=>resp[i] !== PREGUNTAS[i].ok);
   const oblOk = PREGUNTAS.every((p,i)=>!p.obl || resp[i] === p.ok);
 
   let nivel, titulo, msg;
-  if(fallos.length === 0){
-    nivel="bajo"; titulo="Bajo riesgo";
-    msg="Tu contrato presenta los elementos básicos de revisión.";
-  } else if(oblOk && fallos.length <= 3){
-    nivel="medio"; titulo="Riesgo medio";
-    msg="Existen algunos puntos que deberían revisarse antes de firmar.";
-  } else {
-    nivel="alto"; titulo="Requiere mayor revisión";
-    msg="Se recomienda revisar con mayor detalle el contrato antes de tomar una decisión.";
-  }
+  if(fallos.length === 0){ nivel="bajo"; titulo="Bajo riesgo"; msg="Tu contrato presenta los elementos básicos de revisión."; }
+  else if(oblOk && fallos.length <= 3){ nivel="medio"; titulo="Riesgo medio"; msg="Existen algunos puntos que deberían revisarse antes de firmar."; }
+  else { nivel="alto"; titulo="Requiere mayor revisión"; msg="Se recomienda revisar con mayor detalle el contrato antes de tomar una decisión."; }
 
   const lista = fallos.length
     ? `<h4>Qué conviene aclarar antes de firmar</h4>` + fallos.map(i=>
         `<div class="rec"><b>${PREGUNTAS[i].t}</b>${PREGUNTAS[i].rec}<span>Referencia: ${PREGUNTAS[i].ley}</span></div>`).join("")
     : `<p>No detectamos vacíos en los 8 aspectos básicos. Léelo completo una última vez antes de firmar.</p>`;
 
-  res.innerHTML = `<div class="res ${nivel}">
+  res.innerHTML = `<div class="card res ${nivel}">
     <h3><span class="dot"></span>${titulo}</h3>
     <p>${msg}</p>
     ${lista}
     <h4>Un consejo para tu tipo de contrato</h4>
-    <p>${TIPOS[document.getElementById("tipo").value]}</p>
+    <p>${TIPOS[$("tipo").value]}</p>
+    <div class="cta"><b>¿Quieres un análisis más a fondo?</b><br>Sube tu contrato y la IA señalará las cláusulas concretas que conviene revisar.<br><br><button class="btn" type="button" onclick="tab('I');document.getElementById('herramienta').scrollIntoView({behavior:'smooth'})">Subir mi contrato</button></div>
     <p class="note">Esto es una orientación inicial y no reemplaza la asesoría de un abogado.</p>
   </div>`;
   res.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
-
 function marcar(vals){
   vals.forEach((v,i)=>{ form.querySelector(`input[name="q${i}"][value="${v}"]`).checked = true; });
   actualizarBarra();
 }
-
-document.getElementById("analizar").onclick = analizar;
-document.getElementById("ejemplo").onclick = ()=>{
-  document.getElementById("tipo").value = "alquiler";
-  marcar(["si","si","si","si","si","no","no","si"]);
-  analizar();
-};
-document.getElementById("reiniciar").onclick = ()=>{
+$("analizar").onclick = analizarQ;
+$("ejemplo").onclick = () => { $("tipo").value = "alquiler"; marcar(["si","si","si","si","si","no","no","si"]); analizarQ(); };
+$("reiniciarQ").onclick = () => {
   form.reset(); actualizarBarra();
   document.querySelectorAll(".q").forEach(q=>q.classList.remove("err"));
-  document.getElementById("result").style.display = "none";
+  $("resultQ").style.display = "none";
+};
+
+// =====================================================
+//  PARTE 2: SUBIR CONTRATO + IA (Claude)
+// =====================================================
+let docBlock = null, history = [], busy = false;
+if (PROXY_URL) { $("cfgKey").innerHTML = "<p>Conexión segura configurada.</p>"; }
+
+const SYSTEM = `Eres un asistente que ayuda a personas sin formación jurídica a entender contratos antes de firmarlos, en el contexto del Perú.
+Reglas:
+- Habla en español sencillo, en segunda persona, sin jerga innecesaria.
+- Eres una orientación inicial, no un abogado: nunca afirmes que el contrato es válido o seguro y recomienda consultar a un abogado cuando corresponda.
+- Basa tus comentarios solo en lo que aparece en el documento. Si algo no aparece, dilo; no inventes cláusulas.
+- Si el documento no parece un contrato, indícalo.
+- Cuando cites una norma, usa solo las que conozcas con seguridad (por ejemplo Código Civil peruano o Ley 29571) y sugiere verificarla en fuentes oficiales.`;
+
+const PROMPT = tipo => `Analiza este contrato (tipo indicado por el usuario: ${tipo}).
+Responde SOLO con un objeto JSON válido, sin texto adicional ni bloques de código, con esta forma exacta:
+{
+ "tipo_detectado": "string",
+ "nivel": "bajo" | "medio" | "alto",
+ "resumen": "2-3 frases en lenguaje simple",
+ "aspectos": [
+   {"nombre":"Identificación de las partes","estado":"si"|"no"|"dudoso","comentario":"string corto"},
+   {"nombre":"Objeto del contrato","estado":"...","comentario":"..."},
+   {"nombre":"Obligaciones de cada parte","estado":"...","comentario":"..."},
+   {"nombre":"Duración","estado":"...","comentario":"..."},
+   {"nombre":"Pagos","estado":"...","comentario":"..."},
+   {"nombre":"Qué pasa si alguien incumple","estado":"...","comentario":"..."},
+   {"nombre":"Claridad general de las cláusulas","estado":"...","comentario":"..."}
+ ],
+ "clausulas_atencion": [
+   {"cita":"texto breve y literal de la cláusula","severidad":"alta"|"media"|"baja","problema":"por qué conviene revisarla","sugerencia":"qué pedir o cambiar"}
+ ],
+ "preguntas_para_la_otra_parte": ["string"],
+ "recomendacion_final": "string"
+}
+Criterio de nivel: "bajo" si los elementos básicos están claros y no hay cláusulas preocupantes; "medio" si hay algunos puntos a aclarar; "alto" si faltan elementos importantes o hay cláusulas que pueden perjudicar seriamente al usuario. Máximo 6 cláusulas de atención.`;
+
+const drop = $("drop"), fileIn = $("file");
+drop.onclick = () => fileIn.click();
+drop.onkeydown = e => { if (e.key === "Enter" || e.key === " ") fileIn.click(); };
+["dragover","dragenter"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => { if (e.dataTransfer.files[0]) cargar(e.dataTransfer.files[0]); });
+fileIn.onchange = () => { if (fileIn.files[0]) cargar(fileIn.files[0]); };
+$("ok").onchange = refrescar;
+
+function toBase64(file){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(",")[1]);
+    r.onerror = () => rej(new Error("No se pudo leer el archivo."));
+    r.readAsDataURL(file);
+  });
+}
+
+async function cargar(file){
+  docBlock = null; $("status").innerHTML = "";
+  if (file.size > MAX_MB * 1024 * 1024) { $("fileinfo").innerHTML = `<span class="err-t">El archivo supera ${MAX_MB} MB.</span>`; refrescar(); return; }
+  const name = file.name.toLowerCase();
+  try {
+    if (file.type === "application/pdf" || name.endsWith(".pdf")) {
+      docBlock = {type:"document", source:{type:"base64", media_type:"application/pdf", data: await toBase64(file)}};
+    } else if (file.type.startsWith("image/")) {
+      docBlock = {type:"image", source:{type:"base64", media_type: file.type, data: await toBase64(file)}};
+    } else if (name.endsWith(".docx")) {
+      const r = await mammoth.extractRawText({arrayBuffer: await file.arrayBuffer()});
+      if (!r.value.trim()) throw new Error("El documento Word está vacío.");
+      docBlock = {type:"text", text:"CONTRATO:\n\n" + r.value};
+    } else if (name.endsWith(".txt") || file.type === "text/plain") {
+      docBlock = {type:"text", text:"CONTRATO:\n\n" + await file.text()};
+    } else {
+      throw new Error("Formato no admitido. Usa PDF, DOCX, TXT, JPG o PNG.");
+    }
+    $("fileinfo").textContent = "✅ " + file.name + " (" + (file.size/1024).toFixed(0) + " KB)";
+  } catch (e) {
+    $("fileinfo").innerHTML = `<span class="err-t">${esc(e.message)}</span>`;
+  }
+  refrescar();
+}
+function refrescar(){ $("go").disabled = !(docBlock && $("ok").checked) || busy; }
+
+async function llamar(messages, maxTokens){
+  const headers = {"content-type":"application/json"};
+  let url = PROXY_URL;
+  if (!PROXY_URL) {
+    const key = $("key").value.trim();
+    if (!key) { $("cfg").open = true; throw new Error("Falta la clave de API. Ábrela en “Configuración de conexión”."); }
+    url = "https://api.anthropic.com/v1/messages";
+    headers["x-api-key"] = key;
+    headers["anthropic-version"] = "2023-06-01";
+    headers["anthropic-dangerous-direct-browser-access"] = "true";
+  }
+  const r = await fetch(url, {method:"POST", headers, body: JSON.stringify({model: MODEL, max_tokens: maxTokens, system: SYSTEM, messages})});
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data?.error?.message || ("Error " + r.status + " al conectar con Claude."));
+  return (data.content || []).filter(b => b.type === "text").map(b => b.text).join("\n");
+}
+function setStatus(html){ $("status").innerHTML = html; }
+
+$("go").onclick = async () => {
+  if (busy) return;
+  busy = true; refrescar();
+  $("outI").style.display = "none"; $("chat").innerHTML = "";
+  setStatus('<span class="spin"></span>Claude está leyendo tu contrato… puede tardar unos segundos.');
+  try {
+    const tipo = $("tipo").selectedOptions[0].textContent;
+    history = [{role:"user", content:[docBlock, {type:"text", text: PROMPT(tipo)}]}];
+    const raw = await llamar(history, 4000);
+    const limpio = raw.replace(/```json|```/g, "").trim();
+    const data = JSON.parse(limpio.slice(limpio.indexOf("{"), limpio.lastIndexOf("}") + 1));
+    history.push({role:"assistant", content: raw});
+    mostrarIA(data);
+    setStatus("");
+  } catch (e) {
+    setStatus(`<span class="err-t">No se pudo analizar: ${esc(e.message)}</span>`);
+  }
+  busy = false; refrescar();
+};
+
+function mostrarIA(d){
+  const nivel = ["bajo","medio","alto"].includes(d.nivel) ? d.nivel : "medio";
+  const titulo = {bajo:"Bajo riesgo", medio:"Riesgo medio", alto:"Requiere mayor revisión"}[nivel];
+  const frase = {
+    bajo:"El contrato presenta elementos básicos de revisión.",
+    medio:"Existen algunos puntos que deberían revisarse antes de firmar.",
+    alto:"Se recomienda revisar con mayor detalle el contrato antes de tomar una decisión."
+  }[nivel];
+  const badge = e => e === "si" ? '<span class="badge b-si">Claro</span>' : e === "no" ? '<span class="badge b-no">Falta</span>' : '<span class="badge b-dudoso">Dudoso</span>';
+  const sev = s => ["alta","media","baja"].includes(s) ? s : "media";
+  const aspectos = (d.aspectos || []).map(a => `<li>${badge(a.estado)}<b>${esc(a.nombre)}:</b> ${esc(a.comentario)}</li>`).join("");
+  const cl = (d.clausulas_atencion || []).map(c => `
+    <div class="clausula sev-${sev(c.severidad)}">
+      <b>Prioridad ${sev(c.severidad)}</b>
+      <q>“${esc(c.cita)}”</q>
+      <div>${esc(c.problema)}</div>
+      <div style="margin-top:.4rem">👉 <b>Qué hacer:</b> ${esc(c.sugerencia)}</div>
+    </div>`).join("") || "<p>No se detectaron cláusulas que requieran atención especial.</p>";
+  const pr = (d.preguntas_para_la_otra_parte || []).map(p => `<li>${esc(p)}</li>`).join("");
+
+  $("resCard").className = "card res " + nivel;
+  $("resCard").innerHTML = `
+    <h3><span class="dot"></span>${titulo}</h3>
+    <p class="tipo">${esc(d.tipo_detectado || "")}</p>
+    <p><b>${frase}</b></p>
+    <p style="margin-top:.6rem">${esc(d.resumen)}</p>
+    <h4>Qué revisamos</h4><ul class="chk">${aspectos}</ul>
+    <h4>Cláusulas que merecen atención</h4>${cl}
+    ${pr ? `<h4>Preguntas para hacerle a la otra parte</h4><ol class="preg">${pr}</ol>` : ""}
+    <h4>Recomendación</h4><p>${esc(d.recomendacion_final)}</p>
+    <p class="note">Comentarios generados por IA: orientación inicial, no asesoría legal.</p>`;
+  $("outI").style.display = "block";
+  $("outI").scrollIntoView({behavior:"smooth"});
+}
+
+function addMsg(cls, txt){
+  const m = document.createElement("div");
+  m.className = "msg " + cls; m.textContent = txt;
+  $("chat").appendChild(m); $("chat").scrollTop = $("chat").scrollHeight;
+  return m;
+}
+async function enviar(){
+  const q = $("q").value.trim();
+  if (!q || busy || !history.length) return;
+  busy = true; $("send").disabled = true; $("q").value = "";
+  addMsg("u", q);
+  const wait = addMsg("a", "Pensando…");
+  try {
+    history.push({role:"user", content:"Responde en texto normal (no JSON), breve y en lenguaje sencillo, basándote en el contrato. Pregunta: " + q});
+    const ans = await llamar(history, 1200);
+    history.push({role:"assistant", content: ans});
+    wait.textContent = ans;
+  } catch (e) {
+    history.pop();
+    wait.textContent = "No se pudo responder: " + e.message;
+  }
+  busy = false; $("send").disabled = false; refrescar();
+}
+$("send").onclick = enviar;
+$("q").onkeydown = e => { if (e.key === "Enter") enviar(); };
+
+$("resetI").onclick = () => {
+  docBlock = null; history = []; fileIn.value = ""; $("fileinfo").textContent = "";
+  $("ok").checked = false; $("outI").style.display = "none"; $("chat").innerHTML = ""; setStatus(""); refrescar();
 };
 </script>
 </body>
