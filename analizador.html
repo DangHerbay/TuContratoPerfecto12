@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu Contrato Perfecto | Sube tu contrato y recibe comentarios</title>
+<meta name="description" content="Sube tu contrato y recibe comentarios de IA sobre los puntos que conviene revisar antes de firmar.">
+<style>
+:root{
+  --bg:#f1f0e8; --card:#fbfbf6; --brown:#7a5f3b; --brown-d:#5b4529;
+  --ink:#1a1a1a; --muted:#555; --soft:#e6e4d6;
+  --ok:#2e9e3f; --mid:#d9a406; --bad:#b3121d;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#1b1a17;--card:#262420;--ink:#f2f0e8;--muted:#b9b5a8;--soft:#322f29;--brown:#a88656;--brown-d:#c9a672}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+header{background:var(--brown);color:#fff;padding:.9rem 5vw;font-weight:700}
+main{max-width:900px;margin:0 auto;padding:2.5rem 5vw 4rem}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;letter-spacing:-1px;margin-bottom:.7rem}
+h1 span{color:var(--brown)}
+h2{font-size:1.5rem;margin:2rem 0 .7rem}
+.lead{color:var(--muted);font-size:1.08rem;margin-bottom:1.5rem}
+.card{background:var(--card);border-radius:20px;padding:1.5rem;box-shadow:0 6px 18px #0001;margin-bottom:1.2rem}
+.btn{display:inline-block;background:var(--brown);color:#fff;border:0;border-radius:999px;padding:.85rem 1.7rem;font-size:1rem;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--brown-d);transform:translateY(-2px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.alt{background:transparent;color:var(--brown);border:2px solid var(--brown)}
+select,input[type=text],input[type=password],textarea{width:100%;padding:.75rem 1rem;border-radius:12px;border:2px solid var(--soft);background:var(--card);color:var(--ink);font-size:1rem;font-family:inherit}
+select{border-color:var(--brown);margin:.4rem 0 1.2rem}
+label.lbl{font-weight:600}
+#drop{border:3px dashed var(--brown);border-radius:22px;padding:2.4rem 1rem;text-align:center;cursor:pointer;background:var(--card);transition:.2s}
+#drop.over{background:var(--soft)}
+#drop .ico{font-size:2.6rem}
+#drop small{display:block;color:var(--muted);margin-top:.4rem}
+#fileinfo{margin-top:.8rem;font-weight:600}
+.actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}
+.consent{display:flex;gap:.6rem;align-items:flex-start;margin-top:1rem;font-size:.92rem;color:var(--muted)}
+.consent input{margin-top:.3rem;accent-color:var(--brown);width:1.1rem;height:1.1rem}
+details.cfg{margin-top:1rem;font-size:.92rem}
+details.cfg summary{cursor:pointer;color:var(--muted)}
+details.cfg div{margin-top:.6rem}
+#status{margin-top:1rem;font-weight:600}
+.spin{display:inline-block;width:18px;height:18px;border:3px solid var(--soft);border-top-color:var(--brown);border-radius:50%;animation:s 1s linear infinite;vertical-align:middle;margin-right:.5rem}
+@keyframes s{to{transform:rotate(360deg)}}
+#out{display:none}
+.res{border-top:10px solid var(--brown)}
+.res.bajo{border-top-color:var(--ok)}.res.medio{border-top-color:var(--mid)}.res.alto{border-top-color:var(--bad)}
+.dot{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:.5rem;background:var(--brown)}
+.bajo .dot{background:var(--ok)}.medio .dot{background:var(--mid)}.alto .dot{background:var(--bad)}
+.res h3{font-size:1.7rem}
+.tipo{color:var(--muted);margin-bottom:.8rem}
+ul.chk{list-style:none}
+ul.chk li{padding:.45rem 0;border-bottom:1px solid var(--soft)}
+ul.chk li:last-child{border:0}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;padding:.15rem .6rem;border-radius:99px;color:#fff;margin-right:.5rem}
+.b-si{background:var(--ok)}.b-no{background:var(--bad)}.b-dudoso{background:var(--mid)}
+.clausula{background:var(--soft);border-radius:14px;padding:1rem 1.2rem;margin:.7rem 0}
+.clausula q{display:block;font-style:italic;color:var(--muted);margin:.3rem 0;font-size:.93rem}
+.clausula .sug{margin-top:.4rem}
+.sev-alta{border-left:6px solid var(--bad)}.sev-media{border-left:6px solid var(--mid)}.sev-baja{border-left:6px solid var(--ok)}
+ol.preg{padding-left:1.3rem}
+ol.preg li{margin:.4rem 0}
+.aviso{background:var(--soft);border-left:6px solid var(--brown);border-radius:14px;padding:1rem 1.3rem;font-size:.9rem;margin-top:1rem}
+/* chat */
+#chat{max-height:380px;overflow-y:auto;margin:.8rem 0}
+.msg{padding:.7rem 1rem;border-radius:16px;margin:.5rem 0;max-width:88%;white-space:pre-wrap}
+.msg.u{background:var(--brown);color:#fff;margin-left:auto}
+.msg.a{background:var(--soft)}
+.row{display:flex;gap:.6rem}
+.err{color:var(--bad);font-weight:600}
+footer{text-align:center;color:var(--muted);font-size:.88rem;padding:2rem 5vw}
+</style>
+</head>
+<body>
+<header>⚖️ Tu Contrato Perfecto</header>
+
+<main>
+  <h1>Sube tu contrato y <span>recibe comentarios</span> antes de firmar</h1>
+  <p class="lead">Una inteligencia artificial lee tu contrato, te dice qué puntos conviene aclarar y responde tus dudas en lenguaje sencillo.</p>
+
+  <div class="card">
+    <label class="lbl" for="tipo">¿Qué tipo de contrato es?</label>
+    <select id="tipo">
+      <option value="alquiler de vivienda o local">Alquiler de vivienda o local</option>
+      <option value="prestación de servicios">Contrato de servicios</option>
+      <option value="acuerdo entre particulares">Acuerdo entre particulares</option>
+      <option value="otro contrato simple">Otro contrato simple</option>
+    </select>
+
+    <div id="drop" tabindex="0" role="button" aria-label="Subir archivo">
+      <div class="ico">📄</div>
+      <b>Arrastra tu contrato aquí o haz clic para elegirlo</b>
+      <small>PDF, Word (.docx), TXT o foto (JPG/PNG) · máximo 10 MB</small>
+      <input type="file" id="file" accept=".pdf,.docx,.txt,image/png,image/jpeg" hidden>
+    </div>
+    <div id="fileinfo"></div>
+
+    <label class="consent">
+      <input type="checkbox" id="ok">
+      <span>Entiendo que el contenido de mi documento se enviará a Anthropic (Claude) para ser analizado. Evita subir documentos con datos muy sensibles; puedes tapar tu DNI, cuentas bancarias y direcciones antes de subirlo.</span>
+    </label>
+
+    <details class="cfg" id="cfg">
+      <summary>⚙️ Configuración de conexión</summary>
+      <div id="cfgKey">
+        <label for="key">Clave de API de Anthropic (solo modo demo; se guarda únicamente en la memoria de esta pestaña)</label>
+        <input type="password" id="key" placeholder="sk-ant-..." autocomplete="off">
+      </div>
+    </details>
+
+    <div class="actions">
+      <button class="btn" id="go" disabled>Analizar mi contrato</button>
+      <button class="btn alt" id="reset" type="button">Empezar de nuevo</button>
+    </div>
+    <div id="status" aria-live="polite"></div>
+  </div>
+
+  <div id="out">
+    <div class="card res" id="resCard"></div>
+    <div class="card">
+      <h2 style="margin-top:0">💬 Pregunta lo que quieras sobre tu contrato</h2>
+      <div id="chat"></div>
+      <div class="row">
+        <input type="text" id="q" placeholder="Ej.: ¿Qué pasa si quiero terminar antes el contrato?">
+        <button class="btn" id="send">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="aviso"><b>Importante:</b> los comentarios los genera una IA y pueden contener errores. Son una orientación inicial, no asesoría legal ni garantía de que el contrato sea válido o seguro. Ante contratos de alto valor o dudas serias, consulta con un abogado.</div>
+</main>
+
+<footer>Tu Contrato Perfecto · “Antes de firmar, revisa lo importante.”</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script>
+// ================== CONFIGURACIÓN ==================
+// Modo producción: pega aquí la URL de tu Cloudflare Worker (ver instrucciones).
+// Si lo dejas vacío, la página usará el modo demo con la clave del usuario.
+const PROXY_URL = "";
+const MODEL = "claude-sonnet-5-5";   // cámbialo si quieres otro modelo
+const MAX_MB = 10;
+// ====================================================
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+let docBlock = null;         // contenido del documento para Claude
+let history = [];            // conversación con Claude
+let busy = false;
+
+if (PROXY_URL) { $("cfgKey").innerHTML = "<p>Conexión segura configurada.</p>"; }
+
+const SYSTEM = `Eres un asistente que ayuda a personas sin formación jurídica a entender contratos antes de firmarlos, en el contexto del Perú.
+Reglas:
+- Habla en español sencillo, en segunda persona, sin jerga innecesaria.
+- Eres una orientación inicial, no un abogado: nunca afirmes que el contrato es válido o seguro y recomienda consultar a un abogado cuando corresponda.
+- Basa tus comentarios solo en lo que aparece en el documento. Si algo no aparece, dilo; no inventes cláusulas.
+- Si el documento no parece un contrato, indícalo.
+- Cuando cites una norma, usa solo las que conozcas con seguridad (por ejemplo Código Civil peruano o Ley 29571) y sugiere verificarla en fuentes oficiales.`;
+
+const PROMPT = tipo => `Analiza este contrato (tipo indicado por el usuario: ${tipo}).
+Responde SOLO con un objeto JSON válido, sin texto adicional ni bloques de código, con esta forma exacta:
+{
+ "tipo_detectado": "string",
+ "nivel": "bajo" | "medio" | "alto",
+ "resumen": "2-3 frases en lenguaje simple",
+ "aspectos": [
+   {"nombre":"Identificación de las partes","estado":"si"|"no"|"dudoso","comentario":"string corto"},
+   {"nombre":"Objeto del contrato","estado":"...","comentario":"..."},
+   {"nombre":"Obligaciones de cada parte","estado":"...","comentario":"..."},
+   {"nombre":"Duración","estado":"...","comentario":"..."},
+   {"nombre":"Pagos","estado":"...","comentario":"..."},
+   {"nombre":"Qué pasa si alguien incumple","estado":"...","comentario":"..."},
+   {"nombre":"Claridad general de las cláusulas","estado":"...","comentario":"..."}
+ ],
+ "clausulas_atencion": [
+   {"cita":"texto breve y literal de la cláusula","severidad":"alta"|"media"|"baja","problema":"por qué conviene revisarla","sugerencia":"qué pedir o cambiar"}
+ ],
+ "preguntas_para_la_otra_parte": ["string"],
+ "recomendacion_final": "string"
+}
+Criterio de nivel: "bajo" si los elementos básicos están claros y no hay cláusulas preocupantes; "medio" si hay algunos puntos a aclarar; "alto" si faltan elementos importantes o hay cláusulas que pueden perjudicar seriamente al usuario. Máximo 6 cláusulas de atención.`;
+
+// ---------- Subida de archivos ----------
+const drop = $("drop"), fileIn = $("file");
+drop.onclick = () => fileIn.click();
+drop.onkeydown = e => { if (e.key === "Enter" || e.key === " ") fileIn.click(); };
+["dragover","dragenter"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => { if (e.dataTransfer.files[0]) cargar(e.dataTransfer.files[0]); });
+fileIn.onchange = () => { if (fileIn.files[0]) cargar(fileIn.files[0]); };
+$("ok").onchange = refrescar;
+
+function toBase64(file){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(",")[1]);
+    r.onerror = () => rej(new Error("No se pudo leer el archivo."));
+    r.readAsDataURL(file);
+  });
+}
+
+async function cargar(file){
+  docBlock = null; $("status").innerHTML = "";
+  if (file.size > MAX_MB * 1024 * 1024) { $("fileinfo").innerHTML = `<span class="err">El archivo supera ${MAX_MB} MB.</span>`; refrescar(); return; }
+  const name = file.name.toLowerCase();
+  try {
+    if (file.type === "application/pdf" || name.endsWith(".pdf")) {
+      docBlock = {type:"document", source:{type:"base64", media_type:"application/pdf", data: await toBase64(file)}};
+    } else if (file.type.startsWith("image/")) {
+      docBlock = {type:"image", source:{type:"base64", media_type: file.type, data: await toBase64(file)}};
+    } else if (name.endsWith(".docx")) {
+      const r = await mammoth.extractRawText({arrayBuffer: await file.arrayBuffer()});
+      if (!r.value.trim()) throw new Error("El documento Word está vacío.");
+      docBlock = {type:"text", text:"CONTRATO:\n\n" + r.value};
+    } else if (name.endsWith(".txt") || file.type === "text/plain") {
+      docBlock = {type:"text", text:"CONTRATO:\n\n" + await file.text()};
+    } else {
+      throw new Error("Formato no admitido. Usa PDF, DOCX, TXT, JPG o PNG.");
+    }
+    $("fileinfo").textContent = "✅ " + file.name + " (" + (file.size/1024).toFixed(0) + " KB)";
+  } catch (e) {
+    $("fileinfo").innerHTML = `<span class="err">${esc(e.message)}</span>`;
+  }
+  refrescar();
+}
+
+function refrescar(){ $("go").disabled = !(docBlock && $("ok").checked) || busy; }
+
+// ---------- Llamada a Claude ----------
+async function llamar(messages, maxTokens){
+  const headers = {"content-type":"application/json"};
+  let url = PROXY_URL;
+  if (!PROXY_URL) {
+    const key = $("key").value.trim();
+    if (!key) { $("cfg").open = true; throw new Error("Falta la clave de API. Ábrela en “Configuración de conexión”."); }
+    url = "https://api.anthropic.com/v1/messages";
+    headers["x-api-key"] = key;
+    headers["anthropic-version"] = "2023-06-01";
+    headers["anthropic-dangerous-direct-browser-access"] = "true";
+  }
+  const r = await fetch(url, {method:"POST", headers, body: JSON.stringify({model: MODEL, max_tokens: maxTokens, system: SYSTEM, messages})});
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data?.error?.message || ("Error " + r.status + " al conectar con Claude."));
+  return (data.content || []).filter(b => b.type === "text").map(b => b.text).join("\n");
+}
+
+function setStatus(html){ $("status").innerHTML = html; }
+
+$("go").onclick = async () => {
+  if (busy) return;
+  busy = true; refrescar();
+  $("out").style.display = "none"; $("chat").innerHTML = "";
+  setStatus('<span class="spin"></span>Claude está leyendo tu contrato… puede tardar unos segundos.');
+  try {
+    const tipo = $("tipo").value;
+    history = [{role:"user", content:[docBlock, {type:"text", text: PROMPT(tipo)}]}];
+    const raw = await llamar(history, 4000);
+    const limpio = raw.replace(/```json|```/g, "").trim();
+    const ini = limpio.indexOf("{"), fin = limpio.lastIndexOf("}");
+    const data = JSON.parse(limpio.slice(ini, fin + 1));
+    history.push({role:"assistant", content: raw});
+    mostrar(data);
+    setStatus("");
+  } catch (e) {
+    setStatus(`<span class="err">No se pudo analizar: ${esc(e.message)}</span>`);
+  }
+  busy = false; refrescar();
+};
+
+function mostrar(d){
+  const nivel = ["bajo","medio","alto"].includes(d.nivel) ? d.nivel : "medio";
+  const titulo = {bajo:"Bajo riesgo", medio:"Riesgo medio", alto:"Requiere mayor revisión"}[nivel];
+  const frase = {
+    bajo:"El contrato presenta elementos básicos de revisión.",
+    medio:"Existen algunos puntos que deberían revisarse antes de firmar.",
+    alto:"Se recomienda revisar con mayor detalle el contrato antes de tomar una decisión."
+  }[nivel];
+  const badge = e => e === "si" ? '<span class="badge b-si">Claro</span>' : e === "no" ? '<span class="badge b-no">Falta</span>' : '<span class="badge b-dudoso">Dudoso</span>';
+  const aspectos = (d.aspectos || []).map(a => `<li>${badge(a.estado)}<b>${esc(a.nombre)}:</b> ${esc(a.comentario)}</li>`).join("");
+  const cl = (d.clausulas_atencion || []).map(c => `
+    <div class="clausula sev-${esc(c.severidad)}">
+      <b>Prioridad ${esc(c.severidad)}</b>
+      <q>“${esc(c.cita)}”</q>
+      <div>${esc(c.problema)}</div>
+      <div class="sug">👉 <b>Qué hacer:</b> ${esc(c.sugerencia)}</div>
+    </div>`).join("") || "<p>No se detectaron cláusulas que requieran atención especial.</p>";
+  const pr = (d.preguntas_para_la_otra_parte || []).map(p => `<li>${esc(p)}</li>`).join("");
+
+  $("resCard").className = "card res " + nivel;
+  $("resCard").innerHTML = `
+    <h3><span class="dot"></span>${titulo}</h3>
+    <p class="tipo">${esc(d.tipo_detectado || "")}</p>
+    <p><b>${frase}</b></p>
+    <p style="margin-top:.6rem">${esc(d.resumen)}</p>
+    <h2>Qué revisamos</h2><ul class="chk">${aspectos}</ul>
+    <h2>Cláusulas que merecen atención</h2>${cl}
+    ${pr ? `<h2>Preguntas para hacerle a la otra parte</h2><ol class="preg">${pr}</ol>` : ""}
+    <h2>Recomendación</h2><p>${esc(d.recomendacion_final)}</p>`;
+  $("out").style.display = "block";
+  $("out").scrollIntoView({behavior:"smooth"});
+}
+
+// ---------- Chat de seguimiento ----------
+function addMsg(cls, txt){
+  const m = document.createElement("div");
+  m.className = "msg " + cls; m.textContent = txt;
+  $("chat").appendChild(m); $("chat").scrollTop = $("chat").scrollHeight;
+  return m;
+}
+async function enviar(){
+  const q = $("q").value.trim();
+  if (!q || busy || !history.length) return;
+  busy = true; $("send").disabled = true; $("q").value = "";
+  addMsg("u", q);
+  const wait = addMsg("a", "Pensando…");
+  try {
+    history.push({role:"user", content:"Responde en texto normal (no JSON), breve y en lenguaje sencillo, basándote en el contrato. Pregunta: " + q});
+    const ans = await llamar(history, 1200);
+    history.push({role:"assistant", content: ans});
+    wait.textContent = ans;
+  } catch (e) {
+    history.pop();
+    wait.textContent = "No se pudo responder: " + e.message;
+  }
+  busy = false; $("send").disabled = false; refrescar();
+}
+$("send").onclick = enviar;
+$("q").onkeydown = e => { if (e.key === "Enter") enviar(); };
+
+$("reset").onclick = () => {
+  docBlock = null; history = []; fileIn.value = ""; $("fileinfo").textContent = "";
+  $("ok").checked = false; $("out").style.display = "none"; $("chat").innerHTML = ""; setStatus(""); refrescar();
+};
+</script>
+</body>
+</html>
