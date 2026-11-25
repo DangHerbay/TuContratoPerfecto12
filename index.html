@@ -3,310 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Revisión Fácil de Contratos | Legal Tech</title>
-<meta name="description" content="Prototipo Legal Tech de orientación jurídica para revisar contratos antes de firmar.">
+<title>Tu Contrato Perfecto | Revisa tu contrato antes de firmar</title>
+<meta name="description" content="Responde 8 preguntas sencillas y descubre qué puntos de tu contrato conviene revisar antes de firmar.">
 <style>
 :root{
-  --bg:#e5e6db; --card:#f3f3ec; --brown:#7a5f3b; --brown-d:#5b4529;
-  --ink:#141414; --white:#fff;
-  --ok:#2e9e3f; --mid:#e8b923; --bad:#b3121d;
+  --bg:#f1f0e8; --card:#fbfbf6; --brown:#7a5f3b; --brown-d:#5b4529;
+  --ink:#1a1a1a; --muted:#555; --white:#fff;
+  --ok:#2e9e3f; --mid:#d9a406; --bad:#b3121d; --soft:#e6e4d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1a17; --card:#262420; --ink:#f2f0e8; --muted:#b9b5a8; --soft:#322f29; --brown:#a88656; --brown-d:#c9a672;
+  }
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
-a{color:inherit}
-header.nav{position:sticky;top:0;z-index:10;background:var(--brown);color:var(--white);display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;align-items:center;justify-content:space-between;padding:.8rem 5vw}
-.nav strong{letter-spacing:.5px}
-.nav nav{display:flex;flex-wrap:wrap;gap:1rem;font-size:.92rem}
-.nav nav a{text-decoration:none;opacity:.9}
-.nav nav a:hover{opacity:1;text-decoration:underline}
+body{font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
 section{padding:4.5rem 5vw}
-.wrap{max-width:1050px;margin:0 auto}
-h1{font-size:clamp(2.4rem,7vw,4.6rem);line-height:1;letter-spacing:-1px;text-transform:uppercase}
-h2{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin-bottom:1rem}
-h2::after{content:"";display:block;width:70px;height:5px;background:var(--brown);border-radius:4px;margin-top:.6rem}
-.hero{min-height:80vh;display:flex;align-items:center}
-.hero .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center}
-.hero .tag{font-weight:600;margin-bottom:.6rem}
-.hero .sub{font-weight:700;font-size:1.25rem;margin:1.2rem 0}
-.hero-art{background:var(--brown);border-radius:28px;aspect-ratio:4/5;display:grid;place-items:center;color:var(--white);font-size:7rem;box-shadow:0 20px 40px #0003}
-.btn{display:inline-block;background:var(--brown);color:var(--white);border:0;border-radius:999px;padding:.85rem 1.8rem;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;letter-spacing:-1px}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;margin-bottom:.6rem}
+.lead{color:var(--muted);font-size:1.1rem;max-width:640px}
+header{position:sticky;top:0;z-index:10;background:var(--brown);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.8rem 5vw;gap:1rem;flex-wrap:wrap}
+header a{color:#fff;text-decoration:none;font-size:.95rem}
+header nav{display:flex;gap:1.2rem;flex-wrap:wrap}
+header nav a:hover{text-decoration:underline}
+.brand{font-weight:700}
+.btn{display:inline-block;background:var(--brown);color:#fff;border:0;border-radius:999px;padding:.9rem 1.8rem;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
 .btn:hover{background:var(--brown-d);transform:translateY(-2px)}
 .btn.alt{background:transparent;color:var(--brown);border:2px solid var(--brown)}
-.btn.alt:hover{background:var(--brown);color:var(--white)}
-.dark{background:var(--brown);color:var(--white)}
-.dark h2::after{background:var(--bg)}
-.grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.card{background:var(--card);border-radius:22px;padding:1.5rem;box-shadow:0 6px 18px #0001}
-.dark .card{background:#ffffff1c;box-shadow:none}
+.btn.alt:hover{background:var(--brown);color:#fff}
+.hero{min-height:78vh;display:flex;align-items:center}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center}
+.hero h1 span{color:var(--brown)}
+.hero p{margin:1.2rem 0 1.8rem}
+.hero-card{background:var(--brown);color:#fff;border-radius:28px;padding:2rem;box-shadow:0 20px 40px #0003}
+.hero-card h3{margin-bottom:1rem}
+.hero-card li{list-style:none;padding:.5rem 0;border-bottom:1px solid #ffffff30}
+.hero-card li:last-child{border:0}
+.grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:1.8rem}
+.card{background:var(--card);border-radius:20px;padding:1.5rem;box-shadow:0 6px 18px #0001}
 .card h3{margin-bottom:.4rem}
-.pill{display:inline-block;background:var(--brown);color:var(--white);padding:.5rem 1.2rem;border-radius:999px;margin:.25rem .25rem .25rem 0;font-weight:600;font-size:.95rem}
-.pill.light{background:#ffffff26}
-ul.clean{list-style:none}
-ul.clean li{padding:.45rem 0 .45rem 1.6rem;position:relative}
-ul.clean li::before{content:"›";position:absolute;left:0;font-weight:700}
-.steps{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1rem}
-.step{background:var(--card);border-radius:999px;padding:.6rem 1.2rem;font-weight:600;color:var(--ink)}
-.arrow{font-weight:700;font-size:1.3rem}
+.card p{color:var(--muted);font-size:.97rem}
+.num{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--brown);color:#fff;font-weight:700;margin-bottom:.8rem}
+.alt-bg{background:var(--soft)}
+.chips{margin-top:1.4rem}
+.chip{display:inline-block;background:var(--brown);color:#fff;padding:.5rem 1.1rem;border-radius:999px;margin:.25rem .25rem .25rem 0;font-weight:600;font-size:.93rem}
 /* Herramienta */
-#form .q{background:var(--card);border-radius:18px;padding:1.1rem 1.3rem;margin-bottom:.9rem;border-left:6px solid var(--brown)}
-#form .q.err{border-left-color:var(--bad);background:#fbeaea}
-.q p{font-weight:600;margin-bottom:.5rem}
-.q small{display:block;color:#555;margin-bottom:.5rem}
-.opts label{display:inline-flex;align-items:center;gap:.4rem;margin-right:1.4rem;cursor:pointer}
+.bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden;margin:1rem 0 1.6rem}
+.bar i{display:block;height:100%;width:0;background:var(--brown);transition:width .3s}
+label.lbl{font-weight:600}
+select{display:block;padding:.7rem 1rem;border-radius:12px;border:2px solid var(--brown);background:var(--card);color:var(--ink);font-size:1rem;margin:.4rem 0 1.4rem}
+.q{background:var(--card);border-radius:18px;padding:1.1rem 1.3rem;margin-bottom:.9rem;border-left:6px solid var(--brown)}
+.q.err{border-left-color:var(--bad)}
+.q p{font-weight:600;margin-bottom:.2rem}
+.q small{display:block;color:var(--muted);margin-bottom:.6rem}
+.opts label{display:inline-flex;align-items:center;gap:.4rem;margin-right:1.5rem;cursor:pointer}
 .opts input{accent-color:var(--brown);width:1.1rem;height:1.1rem}
-select{padding:.7rem 1rem;border-radius:12px;border:2px solid var(--brown);background:var(--card);font-size:1rem;margin:.4rem 0 1.4rem}
-.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1rem}
-#result{margin-top:2rem;display:none}
+.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}
+#result{display:none;margin-top:2rem}
 .res{border-radius:24px;padding:1.8rem;background:var(--card);box-shadow:0 8px 24px #0002;border-top:10px solid var(--brown)}
 .res.bajo{border-top-color:var(--ok)}.res.medio{border-top-color:var(--mid)}.res.alto{border-top-color:var(--bad)}
-.light-dot{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:.5rem}
-.bajo .light-dot{background:var(--ok)}.medio .light-dot{background:var(--mid)}.alto .light-dot{background:var(--bad)}
-.res h3{font-size:1.7rem;margin-bottom:.4rem}
-.res h4{margin:1.2rem 0 .4rem}
-.rec{background:var(--bg);border-radius:14px;padding:.9rem 1.1rem;margin:.6rem 0}
-.rec b{display:block}
-.rec span{font-size:.88rem;color:#4a4a4a}
-.aviso{font-size:.85rem;margin-top:1.2rem;color:#444}
-.levels .card{border-top:8px solid}
-.levels .l1{border-color:var(--ok)}.levels .l2{border-color:var(--mid)}.levels .l3{border-color:var(--bad)}
-.code{background:#1e1e1e;color:#e6e6e6;border-radius:18px;padding:1.2rem;font-family:Consolas,monospace;font-size:.85rem;overflow-x:auto;white-space:pre}
-footer{background:var(--brown-d);color:var(--white);text-align:center;padding:2.5rem 5vw}
-footer q{font-size:1.3rem;display:block;margin-bottom:.6rem}
-@media(max-width:800px){.hero .wrap{grid-template-columns:1fr}.hero-art{aspect-ratio:16/9;font-size:4rem}}
+.dot{display:inline-block;width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:.5rem}
+.bajo .dot{background:var(--ok)}.medio .dot{background:var(--mid)}.alto .dot{background:var(--bad)}
+.res h3{font-size:1.7rem;margin-bottom:.3rem}
+.res h4{margin:1.3rem 0 .5rem}
+.rec{background:var(--soft);border-radius:14px;padding:.9rem 1.1rem;margin:.6rem 0}
+.rec b{display:block;margin-bottom:.2rem}
+.rec span{display:block;margin-top:.3rem;font-size:.85rem;color:var(--muted)}
+.note{font-size:.88rem;color:var(--muted);margin-top:1.2rem}
+/* Niveles */
+.lv{border-top:8px solid}.lv.a{border-color:var(--ok)}.lv.b{border-color:var(--mid)}.lv.c{border-color:var(--bad)}
+/* FAQ */
+details{background:var(--card);border-radius:16px;padding:1rem 1.3rem;margin-top:.8rem;box-shadow:0 4px 12px #0001}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:.6rem;color:var(--muted)}
+.aviso{background:var(--soft);border-left:6px solid var(--brown);border-radius:14px;padding:1.2rem 1.4rem;margin-top:1.5rem}
+footer{background:var(--brown-d);color:#fff;text-align:center;padding:2.2rem 5vw}
+footer q{font-size:1.25rem;display:block;margin-bottom:.4rem}
+footer small{opacity:.85}
+@media(max-width:800px){.hero .wrap{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <strong>⚖️ Revisión Fácil de Contratos</strong>
+<header>
+  <span class="brand">⚖️ Tu Contrato Perfecto</span>
   <nav>
-    <a href="#problema">Problema</a><a href="#usuario">Usuario</a><a href="#funciona">Cómo funciona</a>
-    <a href="#herramienta">Prototipo</a><a href="#base-legal">Base legal</a><a href="#limites">Límites</a><a href="#equipo">Equipo</a>
+    <a href="#como">Cómo funciona</a>
+    <a href="#revisamos">Qué revisamos</a>
+    <a href="#revisar">Revisar mi contrato</a>
+    <a href="#faq">Preguntas frecuentes</a>
   </nav>
 </header>
 
 <section class="hero">
   <div class="wrap">
     <div>
-      <p class="tag">Legal Tech</p>
-      <h1>Revisión fácil de contratos</h1>
-      <p class="sub">Prototipo de herramienta de orientación jurídica</p>
-      <a class="btn" href="#herramienta">Probar el prototipo</a>
+      <h1>Antes de firmar, <span>revisa lo importante.</span></h1>
+      <p class="lead">Responde 8 preguntas sencillas sobre tu contrato y descubre en pocos minutos qué puntos conviene aclarar antes de aceptar. No necesitas saber de leyes.</p>
+      <a class="btn" href="#revisar">Revisar mi contrato</a>
     </div>
-    <div class="hero-art" aria-hidden="true">⚖️</div>
+    <div class="hero-card">
+      <h3>Pensado para tu caso</h3>
+      <ul>
+        <li>🏠 Alquiler de vivienda o local</li>
+        <li>🛠️ Contratos de servicios</li>
+        <li>🤝 Acuerdos entre particulares</li>
+        <li>📄 Otros contratos simples</li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section id="problema" class="dark">
+<section id="como" class="alt-bg">
   <div class="wrap">
-    <h2>Problema jurídico</h2>
-    <p style="max-width:700px;margin-bottom:1.5rem">Muchas personas firman contratos sin comprender completamente lo que aceptan. Firmar sin revisar aspectos importantes puede generar conflictos posteriores, pérdidas económicas y litigios evitables.</p>
+    <h2>Así de simple</h2>
+    <p class="lead">Tres pasos y sin registrarte.</p>
     <div class="grid">
-      <div class="card"><h3>Derechos y obligaciones</h3><p>No saben qué pueden exigir ni qué se les va a exigir.</p></div>
-      <div class="card"><h3>Condiciones del acuerdo</h3><p>Aceptan cláusulas sin entender su alcance.</p></div>
-      <div class="card"><h3>Pagos y plazos</h3><p>Montos, fechas y formas de pago poco claros.</p></div>
-      <div class="card"><h3>Consecuencias de incumplir</h3><p>Penalidades o resolución del contrato que no se conocían.</p></div>
+      <div class="card"><div class="num">1</div><h3>Elige tu tipo de contrato</h3><p>Alquiler, servicios u otro acuerdo.</p></div>
+      <div class="card"><div class="num">2</div><h3>Responde con Sí o No</h3><p>Mira tu contrato y contesta 8 preguntas cortas.</p></div>
+      <div class="card"><div class="num">3</div><h3>Recibe tu orientación</h3><p>Verás un semáforo de riesgo y qué puntos pedir que te aclaren.</p></div>
     </div>
   </div>
 </section>
 
-<section id="usuario">
+<section id="revisamos">
   <div class="wrap">
-    <h2>Usuario objetivo</h2>
-    <p style="margin-bottom:1rem"><b>Personas que están por firmar un contrato</b> y quieren hacer una revisión básica antes de aceptar. La herramienta ofrece una primera orientación sobre los aspectos que deberían revisar.</p>
-    <span class="pill">Alquiler de inmuebles</span><span class="pill">Contratos de servicios</span>
-    <span class="pill">Acuerdos entre particulares</span><span class="pill">Otros contratos simples</span>
+    <h2>¿Qué conviene revisar antes de firmar?</h2>
+    <p class="lead">Muchos conflictos nacen de cosas que no quedaron claras desde el inicio. Estos son los puntos que vamos a repasar contigo:</p>
+    <div class="chips">
+      <span class="chip">Quiénes firman</span><span class="chip">Para qué es el contrato</span>
+      <span class="chip">Qué hace cada parte</span><span class="chip">Cuánto dura</span>
+      <span class="chip">Pagos y fechas</span><span class="chip">Qué pasa si alguien incumple</span>
+      <span class="chip">Cláusulas confusas</span>
+    </div>
   </div>
 </section>
 
-<section id="funciona" class="dark">
+<section id="revisar" class="alt-bg">
   <div class="wrap">
-    <h2>¿Cómo funciona?</h2>
-    <p style="max-width:720px">El usuario responde preguntas sencillas. No se busca que tenga conocimientos jurídicos: el sistema plantea preguntas que permiten identificar si existen elementos importantes que deberían revisarse.</p>
-    <p style="margin-top:1rem">El prototipo verifica aspectos básicos:</p>
-    <div style="margin:.5rem 0 1.5rem">
-      <span class="pill light">Identificación de las partes</span><span class="pill light">Objeto del contrato</span>
-      <span class="pill light">Obligaciones</span><span class="pill light">Duración</span>
-      <span class="pill light">Pagos</span><span class="pill light">Incumplimiento</span><span class="pill light">Cláusulas confusas</span>
-    </div>
-    <h3>Flujo del prototipo</h3>
-    <div class="steps">
-      <span class="step">Inicio</span><span class="arrow">→</span>
-      <span class="step">Presentación del objetivo</span><span class="arrow">→</span>
-      <span class="step">Usuario responde preguntas</span><span class="arrow">→</span>
-      <span class="step">Análisis de respuestas</span><span class="arrow">→</span>
-      <span class="step">Condiciones IF / ELSE</span><span class="arrow">→</span>
-      <span class="step">Nivel de revisión</span><span class="arrow">→</span>
-      <span class="step">Orientación al usuario</span>
-    </div>
-    <h3 style="margin-top:2rem">¿Qué hace el programa?</h3>
-    <p style="margin-bottom:1rem">Recibe las respuestas y las analiza mediante condiciones lógicas <b>IF → ELIF → ELSE</b>:</p>
-    <div class="code">if len(fallos) == 0:
-    resultado = "Bajo riesgo"
-elif obligatorias_ok and len(fallos) &lt;= 3:
-    resultado = "Riesgo medio"
-else:
-    resultado = "Requiere mayor revisión"</div>
-  </div>
-</section>
+    <h2>Revisa tu contrato</h2>
+    <p class="lead">Ten tu contrato a la mano. Tus respuestas se quedan en tu dispositivo: no se guardan ni se envían a ningún lado.</p>
+    <div class="bar" aria-hidden="true"><i id="progreso"></i></div>
 
-<section id="herramienta">
-  <div class="wrap">
-    <h2>Prototipo funcional</h2>
-    <p style="margin-bottom:1rem">Responde las 8 preguntas sobre tu contrato. Todo se procesa en tu navegador: no se guarda ni se envía ningún dato.</p>
-
-    <label for="tipo"><b>Tipo de contrato</b></label><br>
+    <label class="lbl" for="tipo">¿Qué tipo de contrato vas a firmar?</label>
     <select id="tipo">
-      <option value="alquiler">Alquiler de inmuebles</option>
+      <option value="alquiler">Alquiler de vivienda o local</option>
       <option value="servicios">Contrato de servicios</option>
       <option value="particulares">Acuerdo entre particulares</option>
       <option value="otro">Otro contrato simple</option>
     </select>
 
     <form id="form" novalidate></form>
+
     <div class="actions">
-      <button class="btn" id="analizar" type="button">Analizar contrato</button>
-      <button class="btn alt" id="ejemplo" type="button">Cargar ejemplo: alquiler</button>
-      <button class="btn alt" id="reiniciar" type="button">Reiniciar</button>
+      <button class="btn" id="analizar" type="button">Ver mi resultado</button>
+      <button class="btn alt" id="ejemplo" type="button">Ver un ejemplo</button>
+      <button class="btn alt" id="reiniciar" type="button">Empezar de nuevo</button>
     </div>
     <div id="result" aria-live="polite"></div>
   </div>
 </section>
 
-<section id="resultados" class="dark">
+<section>
   <div class="wrap">
-    <h2>Resultado: ¿qué recibe el usuario?</h2>
-    <div class="grid levels">
-      <div class="card l1"><h3>🟢 Bajo riesgo</h3><p>“El contrato presenta elementos básicos de revisión.”</p></div>
-      <div class="card l2"><h3>🟡 Riesgo medio</h3><p>“Existen algunos puntos que deberían revisarse antes de firmar.”</p></div>
-      <div class="card l3"><h3>🔴 Requiere mayor revisión</h3><p>“Se recomienda revisar con mayor detalle el contrato antes de tomar una decisión.”</p></div>
-    </div>
-    <h3 style="margin-top:2rem">Aportes del prototipo</h3>
-    <ul class="clean">
-      <li>Facilita una primera revisión.</li>
-      <li>Utiliza preguntas fáciles de entender.</li>
-      <li>Ayuda a identificar puntos que requieren atención.</li>
-      <li>Permite una orientación rápida antes de firmar.</li>
-      <li>Acerca herramientas tecnológicas a problemas jurídicos cotidianos.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="base-legal">
-  <div class="wrap">
-    <h2>Fundamentación jurídica</h2>
-    <p style="margin-bottom:1rem">Cada pregunta del prototipo se vincula con una norma del ordenamiento peruano, para que la orientación no sea arbitraria.</p>
-    <div class="grid" id="legal-grid"></div>
-    <p class="aviso">Normas referenciales: Código Civil peruano (D. Leg. 295) y Ley 29571, Código de Protección y Defensa del Consumidor. Verificar siempre la versión vigente en fuentes oficiales (SPIJ, El Peruano).</p>
-  </div>
-</section>
-
-<section id="limites" class="dark">
-  <div class="wrap">
-    <h2>Limitaciones y ética</h2>
+    <h2>¿Qué significa tu resultado?</h2>
     <div class="grid">
-      <div class="card"><h3>No reemplaza a un abogado</h3><p>Ofrece orientación inicial, no asesoría legal.</p></div>
-      <div class="card"><h3>No valida contratos</h3><p>No determina por sí sola si un contrato es válido.</p></div>
-      <div class="card"><h3>Sin interpretación completa</h3><p>No analiza el texto del contrato ni su contexto.</p></div>
-      <div class="card"><h3>Privacidad</h3><p>No almacena ni transmite las respuestas del usuario; todo ocurre en su navegador.</p></div>
+      <div class="card lv a"><h3>🟢 Bajo riesgo</h3><p>Tu contrato tiene los elementos básicos. Aun así, léelo completo antes de firmar.</p></div>
+      <div class="card lv b"><h3>🟡 Riesgo medio</h3><p>Hay algunos puntos que conviene aclarar antes de firmar.</p></div>
+      <div class="card lv c"><h3>🔴 Requiere mayor revisión</h3><p>Faltan varios elementos importantes. Te recomendamos revisarlo con detalle antes de decidir.</p></div>
     </div>
-    <p style="margin-top:1.2rem">Responsabilidad: un resultado de “bajo riesgo” no garantiza que el contrato sea seguro. Ante cualquier duda, consulta con un profesional del Derecho.</p>
   </div>
 </section>
 
-<section id="equipo">
+<section id="faq" class="alt-bg">
   <div class="wrap">
-    <h2>Integrantes</h2>
-    <div class="grid">
-      <div class="card"><h3>Luana Bellido</h3></div>
-      <div class="card"><h3>Andrea Huacas Toro</h3></div>
-      <div class="card"><h3>Dang Herbay Cruz</h3></div>
-      <div class="card"><h3>Valeria Padilla Arce</h3></div>
-    </div>
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿Necesito saber de leyes para usarlo?</summary><p>No. Las preguntas están escritas en lenguaje cotidiano y solo requieren que mires tu contrato.</p></details>
+    <details><summary>¿Mis datos están seguros?</summary><p>Sí. Todo se procesa en tu navegador. No pedimos tu nombre ni el texto del contrato, y no guardamos tus respuestas.</p></details>
+    <details><summary>¿Me dice si mi contrato es válido?</summary><p>No. Te orienta sobre qué puntos revisar, pero no determina por sí solo la validez de un contrato.</p></details>
+    <details><summary>¿Reemplaza a un abogado?</summary><p>No. Es una primera orientación. Si el contrato es de alto valor o tienes dudas serias, consulta con un abogado.</p></details>
+    <details><summary>¿Qué hago si me sale riesgo medio o alto?</summary><p>Pide por escrito a la otra parte que aclare o agregue los puntos señalados, y no firmes hasta tenerlos resueltos.</p></details>
+    <div class="aviso"><b>Importante:</b> un resultado de “bajo riesgo” no garantiza que el contrato sea seguro. Esta herramienta ofrece orientación inicial y no constituye asesoría legal.</div>
   </div>
 </section>
 
 <footer>
   <q>Antes de firmar, revisa lo importante.</q>
-  <p>Una herramienta de orientación inicial para identificar aspectos del contrato que deberían revisarse antes de decidir.</p>
-  <p style="margin-top:1rem;font-size:.85rem;opacity:.8">¡Gracias! · Evaluación Continua 3 · Demo Day</p>
+  <small>Tu Contrato Perfecto · Orientación inicial sobre contratos</small>
 </footer>
 
 <script>
-// ---------- Datos: 8 preguntas del prototipo ----------
-// ok = respuesta esperada; obligatoria = pregunta clave para el nivel de riesgo
 const PREGUNTAS = [
-  {t:"¿El contrato tiene los nombres completos de las personas o empresas que van a firmar?", ok:"si", obl:true,
-   rec:"Identifica por completo a las partes (nombres, DNI o RUC, domicilio y representante si es empresa).",
-   ley:"Art. 140 C.C.: el acto jurídico requiere agente capaz; identificar a las partes permite verificar capacidad y legitimidad."},
-  {t:"¿Las dos partes están de acuerdo con lo que dice el contrato?", ok:"si", obl:false,
-   rec:"No firmes hasta que ambas partes hayan aceptado expresamente todo el contenido.",
-   ley:"Art. 1352 C.C.: los contratos se perfeccionan por el consentimiento de las partes."},
-  {t:"¿El contrato explica claramente para qué se está haciendo el acuerdo?", ok:"si", obl:true,
-   rec:"Exige que se describa con precisión el objeto: qué bien o servicio se entrega y con qué finalidad.",
-   ley:"Arts. 140 y 1402 C.C.: el objeto debe ser física y jurídicamente posible y determinado."},
-  {t:"¿El contrato indica qué debe hacer cada persona que participa?", ok:"si", obl:true,
-   rec:"Pide que se detallen las obligaciones de cada parte, sin dejar tareas ambiguas.",
-   ley:"Art. 1361 C.C.: los contratos son obligatorios en cuanto se haya expresado en ellos."},
-  {t:"¿El contrato indica cuánto tiempo va a durar el acuerdo?", ok:"si", obl:false,
-   rec:"Define fecha de inicio, plazo y condiciones de renovación o terminación.",
-   ley:"Arts. 1361 y 1666 y ss. C.C. (en alquiler, el plazo condiciona la renovación y el desalojo)."},
-  {t:"¿El contrato explica cuándo y cómo se realizarán los pagos?", ok:"si", obl:false,
-   rec:"Verifica monto, moneda, fecha límite, medio de pago, intereses y comprobantes.",
-   ley:"Arts. 1361 y 1666 C.C. (renta en el arrendamiento); la contraprestación debe estar determinada."},
-  {t:"¿El contrato dice qué pasa si una de las personas no cumple con lo acordado?", ok:"si", obl:false,
-   rec:"Revisa penalidades, plazos para subsanar y causales de resolución del contrato.",
-   ley:"Arts. 1341 (cláusula penal), 1428 y 1430 (resolución por incumplimiento y cláusula resolutoria expresa) C.C."},
-  {t:"¿Hay alguna parte del contrato que no entiende o que le parece confusa?", ok:"no", obl:false,
-   rec:"Pide que se reformulen las cláusulas confusas. Las dudas se aclaran antes de firmar, no después.",
-   ley:"Art. 168 C.C. (interpretación según lo expresado) y art. 49 Ley 29571 (cláusulas abusivas en contratos de consumo)."}
+  {t:"¿El contrato tiene los nombres completos de las personas o empresas que van a firmar?", ayuda:"Revisa que aparezcan nombres completos, documento de identidad (DNI o RUC) y domicilio.", ok:"si", obl:true,
+   rec:"Pide que se identifique a todas las partes con nombre completo, documento y domicilio. Si firma una empresa, que figure su representante.",
+   ley:"Código Civil, art. 140: el acto jurídico requiere una persona capaz y plena identificación de quienes se obligan."},
+  {t:"¿Las dos partes están de acuerdo con lo que dice el contrato?", ayuda:"Ambos deben haber leído y aceptado todo el contenido.", ok:"si", obl:false,
+   rec:"No firmes hasta que ambas partes hayan aceptado todo el contenido. Si algo se habló de palabra, pide que se escriba.",
+   ley:"Código Civil, art. 1352: los contratos se perfeccionan con el consentimiento de las partes."},
+  {t:"¿El contrato explica claramente para qué se está haciendo el acuerdo?", ayuda:"Por ejemplo: qué se alquila, qué servicio se presta o qué se entrega.", ok:"si", obl:true,
+   rec:"Pide que se describa con precisión qué se entrega o qué servicio se presta, y con qué finalidad.",
+   ley:"Código Civil, art. 140: el objeto del contrato debe ser posible y determinado."},
+  {t:"¿El contrato indica qué debe hacer cada persona que participa?", ayuda:"Cada parte debería tener sus obligaciones por escrito.", ok:"si", obl:true,
+   rec:"Solicita que se detallen las obligaciones de cada persona, sin tareas ambiguas ni sobreentendidos.",
+   ley:"Código Civil, art. 1361: los contratos obligan a lo que se expresó en ellos."},
+  {t:"¿El contrato indica cuánto tiempo va a durar el acuerdo?", ayuda:"Busca fecha de inicio, fecha de término o plazo.", ok:"si", obl:false,
+   rec:"Define la fecha de inicio, el plazo y qué pasa al terminar: renovación, aviso previo o devolución.",
+   ley:"Código Civil, art. 1361 y siguientes; en alquileres, el plazo condiciona la renovación y la devolución del bien."},
+  {t:"¿El contrato explica cuándo y cómo se realizarán los pagos?", ayuda:"Monto, moneda, fecha límite y forma de pago.", ok:"si", obl:false,
+   rec:"Verifica monto, moneda, fecha límite, medio de pago e intereses por retraso, y pide comprobantes de cada pago.",
+   ley:"Código Civil, art. 1361: el pago pactado debe quedar claro; en alquiler, la renta es un elemento esencial."},
+  {t:"¿El contrato dice qué pasa si una de las personas no cumple con lo acordado?", ayuda:"Por ejemplo: multas, plazo para corregir o cómo se termina el contrato.", ok:"si", obl:false,
+   rec:"Revisa si hay penalidades, cuánto tiempo hay para corregir el incumplimiento y en qué casos se puede terminar el contrato.",
+   ley:"Código Civil, arts. 1341 y 1430: cláusula penal y resolución del contrato por incumplimiento."},
+  {t:"¿Hay alguna parte del contrato que no entiendes o que te parece confusa?", ayuda:"Si dudas de una cláusula, responde Sí.", ok:"no", obl:false,
+   rec:"Pide que reformulen las cláusulas confusas por escrito. Las dudas se aclaran antes de firmar, no después.",
+   ley:"Código Civil, art. 168: el contrato se interpreta según lo que está expresado; Ley 29571, art. 49: protección frente a cláusulas abusivas en contratos de consumo."}
 ];
 
 const TIPOS = {
-  alquiler:"En alquileres, revisa además la garantía, quién asume reparaciones y servicios, y las condiciones de devolución del inmueble.",
-  servicios:"En servicios, revisa entregables, plazos, penalidades por retraso, propiedad de lo creado y causales de terminación.",
-  particulares:"En acuerdos entre particulares, procura dejarlo por escrito, con firmas y copia de documentos de identidad.",
-  otro:"Verifica que el contrato refleje exactamente lo conversado y que no existan acuerdos verbales no escritos."
+  alquiler:"En alquileres, revisa también el monto de la garantía, quién paga las reparaciones y los servicios, y cómo se devuelve el inmueble.",
+  servicios:"En servicios, revisa los entregables, las fechas de entrega, las penalidades por retraso y cómo puede terminar el contrato cada parte.",
+  particulares:"En acuerdos entre particulares, déjalo por escrito, con firmas de ambos y copia de los documentos de identidad.",
+  otro:"Verifica que el contrato refleje exactamente lo conversado y que no existan acuerdos verbales sin escribir."
 };
 
-// ---------- Render ----------
 const form = document.getElementById("form");
 form.innerHTML = PREGUNTAS.map((p,i)=>`
   <div class="q" id="q${i}">
     <p>${i+1}. ${p.t}</p>
+    <small>${p.ayuda}</small>
     <div class="opts">
       <label><input type="radio" name="q${i}" value="si"> Sí</label>
       <label><input type="radio" name="q${i}" value="no"> No</label>
     </div>
   </div>`).join("");
 
-document.getElementById("legal-grid").innerHTML = PREGUNTAS.map((p,i)=>
-  `<div class="card"><h3>Pregunta ${i+1}</h3><p>${p.ley}</p></div>`).join("");
+function actualizarBarra(){
+  const n = PREGUNTAS.filter((p,i)=>form.querySelector(`input[name="q${i}"]:checked`)).length;
+  document.getElementById("progreso").style.width = (n/PREGUNTAS.length*100)+"%";
+}
+form.addEventListener("change", actualizarBarra);
 
-// ---------- Lógica IF / ELIF / ELSE ----------
 function analizar(){
-  const resp = [];
-  let faltan = false;
+  const resp = []; let faltan = false;
   PREGUNTAS.forEach((p,i)=>{
     const sel = form.querySelector(`input[name="q${i}"]:checked`);
     const box = document.getElementById("q"+i);
-    if(!sel){ faltan = true; box.classList.add("err"); } else box.classList.remove("err");
+    box.classList.toggle("err", !sel);
+    if(!sel) faltan = true;
     resp.push(sel ? sel.value : null);
   });
   const res = document.getElementById("result");
+  res.style.display = "block";
   if(faltan){
-    res.style.display="block";
-    res.innerHTML = `<div class="res"><h3>Faltan respuestas</h3><p>Responde las 8 preguntas para obtener la orientación (marcadas en rojo).</p></div>`;
+    res.innerHTML = `<div class="res"><h3>Faltan respuestas</h3><p>Responde las 8 preguntas para ver tu resultado. Las que faltan están marcadas en rojo.</p></div>`;
     return;
   }
-  const fallos = PREGUNTAS.map((p,i)=>i).filter(i => resp[i] !== PREGUNTAS[i].ok);
-  const oblOk = PREGUNTAS.every((p,i)=> !p.obl || resp[i] === p.ok);
+  const fallos = PREGUNTAS.map((p,i)=>i).filter(i=>resp[i] !== PREGUNTAS[i].ok);
+  const oblOk = PREGUNTAS.every((p,i)=>!p.obl || resp[i] === p.ok);
 
   let nivel, titulo, msg;
   if(fallos.length === 0){
     nivel="bajo"; titulo="Bajo riesgo";
-    msg="El contrato presenta elementos básicos de revisión.";
+    msg="Tu contrato presenta los elementos básicos de revisión.";
   } else if(oblOk && fallos.length <= 3){
     nivel="medio"; titulo="Riesgo medio";
     msg="Existen algunos puntos que deberían revisarse antes de firmar.";
@@ -316,37 +277,36 @@ function analizar(){
   }
 
   const lista = fallos.length
-    ? `<h4>Puntos a revisar</h4>` + fallos.map(i=>`<div class="rec"><b>${i+1}. ${PREGUNTAS[i].t}</b>${PREGUNTAS[i].rec}<br><span>Base: ${PREGUNTAS[i].ley}</span></div>`).join("")
-    : `<p>No se detectaron vacíos en los 8 aspectos básicos.</p>`;
+    ? `<h4>Qué conviene aclarar antes de firmar</h4>` + fallos.map(i=>
+        `<div class="rec"><b>${PREGUNTAS[i].t}</b>${PREGUNTAS[i].rec}<span>Referencia: ${PREGUNTAS[i].ley}</span></div>`).join("")
+    : `<p>No detectamos vacíos en los 8 aspectos básicos. Léelo completo una última vez antes de firmar.</p>`;
 
-  res.style.display="block";
   res.innerHTML = `<div class="res ${nivel}">
-    <h3><span class="light-dot"></span>${titulo}</h3>
+    <h3><span class="dot"></span>${titulo}</h3>
     <p>${msg}</p>
     ${lista}
-    <h4>Recomendación según el tipo de contrato</h4>
+    <h4>Un consejo para tu tipo de contrato</h4>
     <p>${TIPOS[document.getElementById("tipo").value]}</p>
-    <p class="aviso">Esta herramienta ofrece solo orientación inicial y no reemplaza la asesoría de un abogado.</p>
+    <p class="note">Esto es una orientación inicial y no reemplaza la asesoría de un abogado.</p>
   </div>`;
-  res.scrollIntoView({behavior:"smooth",block:"nearest"});
+  res.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
 
 function marcar(vals){
   vals.forEach((v,i)=>{ form.querySelector(`input[name="q${i}"][value="${v}"]`).checked = true; });
+  actualizarBarra();
 }
 
 document.getElementById("analizar").onclick = analizar;
 document.getElementById("ejemplo").onclick = ()=>{
-  document.getElementById("tipo").value="alquiler";
-  // Caso de alquiler: partes, objeto, obligaciones, duración y acuerdo OK; pagos e incumplimiento sin claridad; cláusulas confusas
+  document.getElementById("tipo").value = "alquiler";
   marcar(["si","si","si","si","si","no","no","si"]);
-  document.querySelectorAll(".q").forEach(q=>q.classList.remove("err"));
   analizar();
 };
 document.getElementById("reiniciar").onclick = ()=>{
-  form.reset();
+  form.reset(); actualizarBarra();
   document.querySelectorAll(".q").forEach(q=>q.classList.remove("err"));
-  document.getElementById("result").style.display="none";
+  document.getElementById("result").style.display = "none";
 };
 </script>
 </body>
